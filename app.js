@@ -13,6 +13,15 @@ connectDB();
 
 const app = express();
 app.use(express.json());
+
+const cors = require('cors');
+
+// Allow requests from Next.js (localhost:3000)
+app.use(cors({
+  origin: 'http://localhost:3000',
+  credentials: true,
+}));
+// Allow requests from React (localhost:3000)
 app.use('/api/auth', authRoutes); 
 // Swagger setup
 const options = {
@@ -29,7 +38,7 @@ const options = {
       },
     ],
   },
-  apis: ['./routes/*.js'], // Make sure your route files have Swagger comments
+  apis: ['./routes/*.js'], // ✅ Correct
 };
 
 

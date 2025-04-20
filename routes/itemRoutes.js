@@ -4,34 +4,9 @@ const itemController = require('../controllers/itemController');
 
 /**
  * @swagger
- * components:
- *   schemas:
- *     Item:
- *       type: object
- *       required:
- *         - name
- *         - quantity
- *       properties:
- *         id:
- *           type: string
- *           description: The auto-generated ID of the item
- *         name:
- *           type: string
- *           description: Name of the item
- *         quantity:
- *           type: number
- *           description: Quantity of the item
- *       example:
- *         id: 507f1f77bcf86cd799439011
- *         name: Apple
- *         quantity: 10
- */
-
-/**
- * @swagger
  * tags:
  *   name: Items
- *   description: The items managing API
+ *   description: CRUD operations for items
  */
 
 /**
@@ -42,7 +17,7 @@ const itemController = require('../controllers/itemController');
  *     tags: [Items]
  *     responses:
  *       200:
- *         description: List of all items
+ *         description: A list of items
  */
 router.get('/', itemController.getAllItems);
 
@@ -57,7 +32,12 @@ router.get('/', itemController.getAllItems);
  *       content:
  *         application/json:
  *           schema:
- *             $ref: '#/components/schemas/Item'
+ *             type: object
+ *             required:
+ *               - title
+ *             properties:
+ *               title:
+ *                 type: string
  *     responses:
  *       201:
  *         description: Item created successfully
@@ -76,16 +56,18 @@ router.post('/', itemController.createItem);
  *         required: true
  *         schema:
  *           type: string
- *         description: The item ID
  *     requestBody:
  *       required: true
  *       content:
  *         application/json:
  *           schema:
- *             $ref: '#/components/schemas/Item'
+ *             type: object
+ *             properties:
+ *               title:
+ *                 type: string
  *     responses:
  *       200:
- *         description: Item updated successfully
+ *         description: Item updated
  */
 router.put('/:id', itemController.updateItem);
 
@@ -101,10 +83,9 @@ router.put('/:id', itemController.updateItem);
  *         required: true
  *         schema:
  *           type: string
- *         description: The item ID
  *     responses:
  *       200:
- *         description: Item deleted successfully
+ *         description: Item deleted
  */
 router.delete('/:id', itemController.deleteItem);
 
